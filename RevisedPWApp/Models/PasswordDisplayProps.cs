@@ -203,30 +203,34 @@ namespace RevisedPWApp.Models
 
         public void SetPictureBoxImage(PictureBox picture, string imageFile)
         {
-            var dir = Assembly.GetExecutingAssembly();
-            var location = string.Concat(dir.Location.Substring(0, dir.Location.IndexOf("bin", StringComparison.Ordinal)), DefaultFile);
-            try
+            if (string.IsNullOrEmpty(imageFile))
             {
-                imageFile = string.IsNullOrEmpty(imageFile) ? location : imageFile;
+                picture.Image = Properties.Resources.avatar;
+            }
+            else
+            {
                 picture.Image = Image.FromFile(@imageFile);
-                picture.SizeMode = PictureBoxSizeMode.StretchImage;
             }
-            catch (Exception)
-            {
-                picture.Image = Image.FromFile(location);
-                picture.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
+            picture.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         public string GetPhotoLocationFromFile(IEmailAccountRepository emailAccount, int userId)
         {
+            try
+            {
+                var fileName = GetTextFile();
+                if (!File.Exists(fileName)) return DefaultFile;
+                var email = emailAccount.GetRecordById(userId);
+                email.PhotoLocation = fileName;
+                emailAccount.EditEntry(userId, email);
+                return fileName;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Help!");
+                return null;
+            }
             
-            var fileName = GetTextFile();
-            if (!File.Exists(fileName)) return DefaultFile;
-            var email = emailAccount.GetRecordById(userId);
-            email.PhotoLocation = fileName;
-            emailAccount.EditEntry(userId, email);
-            return fileName;
         }
 
         public string GetPasswordFromFile(Display display, ITextFile text, DataGridView dvGrid)
