@@ -35,14 +35,12 @@ namespace RevisedPWApp
         private void btnLogin_Click(object sender, EventArgs e)
         {
             _loginForm.ShowDialog();
-            if (_props.AccountUserId == 0) return;
+            if (_props.AccountUserId == 0) return;//user is not present
             _props.LoadDataGrid(dv, false);
             var imageLocation = _email.GetRecordById(_props.AccountUserId);
             if (string.IsNullOrEmpty(imageLocation.PhotoLocation)) return;
             _props.SetPictureBoxImage(pbAvatar, imageLocation.PhotoLocation);
         }
-
-        
 
         private void btnLogout_Click(object sender, EventArgs e)
         {

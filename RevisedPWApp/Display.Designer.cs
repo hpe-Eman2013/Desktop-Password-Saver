@@ -363,7 +363,7 @@
             this.grpPassword.Controls.Add(this.gpTen);
             this.grpPassword.Controls.Add(this.gpEight);
             this.grpPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPassword.Location = new System.Drawing.Point(462, 82);
+            this.grpPassword.Location = new System.Drawing.Point(574, 72);
             this.grpPassword.Name = "grpPassword";
             this.grpPassword.Size = new System.Drawing.Size(210, 55);
             this.grpPassword.TabIndex = 4;
@@ -412,7 +412,7 @@
             this.chkUnmask.AutoSize = true;
             this.chkUnmask.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.chkUnmask.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUnmask.Location = new System.Drawing.Point(373, 97);
+            this.chkUnmask.Location = new System.Drawing.Point(360, 97);
             this.chkUnmask.Name = "chkUnmask";
             this.chkUnmask.Size = new System.Drawing.Size(83, 22);
             this.chkUnmask.TabIndex = 17;
@@ -561,9 +561,9 @@
             this.pbAvatar.BackgroundImage = global::RevisedPWApp.Properties.Resources.avatar;
             this.pbAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pbAvatar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbAvatar.Location = new System.Drawing.Point(808, 17);
+            this.pbAvatar.Location = new System.Drawing.Point(790, 17);
             this.pbAvatar.Name = "pbAvatar";
-            this.pbAvatar.Size = new System.Drawing.Size(152, 174);
+            this.pbAvatar.Size = new System.Drawing.Size(170, 174);
             this.pbAvatar.TabIndex = 23;
             this.pbAvatar.TabStop = false;
             // 

@@ -31,15 +31,11 @@ namespace RevisedPWApp.Models
         {
 
             //check if user is in the database
-            if (user == string.Empty || password == string.Empty) return 0;
+            if (user == string.Empty || password == string.Empty) return 0;//invalid entry
             var accountUser = _acc.GetRecordByCredentials(user, password);
-            if (accountUser == null) return 0;
-
-            //_appInitializer.PassRepo = new PasswordRepository(_appInitializer.Connector, accountUser.UserId);
-            //_appInitializer.AccRepo.AccountUsers.Clear();
-            //_appInitializer.AccRepo.AccountUsers.Add(accountUser);
+            if (accountUser == null) return 0;//user is not in database
             AccountUserId = accountUser.UserId;
-            return AccountUserId;
+            return AccountUserId;//user found
         }
 
         public void LogoutUser(DataGridView grid)
@@ -208,11 +204,18 @@ namespace RevisedPWApp.Models
         public void SetPictureBoxImage(PictureBox picture, string imageFile)
         {
             var dir = Assembly.GetExecutingAssembly();
-            var location = string.Concat(dir.Location.Substring(0, dir.Location.IndexOf("bin", StringComparison.Ordinal)),
-                DefaultFile);
-            imageFile = string.IsNullOrEmpty(imageFile) ? location : imageFile;
-            picture.Image = Image.FromFile(@imageFile);
-            picture.SizeMode = PictureBoxSizeMode.StretchImage;
+            var location = string.Concat(dir.Location.Substring(0, dir.Location.IndexOf("bin", StringComparison.Ordinal)), DefaultFile);
+            try
+            {
+                imageFile = string.IsNullOrEmpty(imageFile) ? location : imageFile;
+                picture.Image = Image.FromFile(@imageFile);
+                picture.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            catch (Exception)
+            {
+                picture.Image = Image.FromFile(location);
+                picture.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
 
         public string GetPhotoLocationFromFile(IEmailAccountRepository emailAccount, int userId)

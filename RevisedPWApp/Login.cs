@@ -23,15 +23,12 @@ namespace RevisedPWApp
             _connect = connector;
         }
 
-
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
             //LoggingOut = false;
             LoginUserFromForm();
             Cursor.Current = Cursors.Default;
-            Close();
         }
         private void LoginUserFromForm()
         {
@@ -60,7 +57,6 @@ namespace RevisedPWApp
             {
                 //ClearLogin();
                 MessageBox.Show(exception.Message, @"Invalid Entry Detected", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
             }
         }
         private List<string> CredentialsInitializer()
