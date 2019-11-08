@@ -128,6 +128,7 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomModule.cs" />
+    <Compile Include="Models\LoginUser.cs" />
     <Compile Include="Models\NinjectConfig.cs" />
     <Compile Include="Models\PasswordDisplayProps.cs" />
     <Compile Include="Program.cs" />
@@ -183,6 +184,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="K:\C#Workspace\FileZipperAndExtractor\FileZipperAndExtractor.csproj">
+      <Project>{2b057fdc-c895-47f3-98cd-88a25116d071}</Project>
+      <Name>FileZipperAndExtractor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

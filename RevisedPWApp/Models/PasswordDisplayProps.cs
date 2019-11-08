@@ -9,7 +9,7 @@ using PasswordCore.Interfaces;
 using PasswordCore.Model;
 using PasswordCore.Repositories;
 using RevisedPWApp.Interfaces;
-using System.Reflection;
+using FileZipperAndExtractor;
 
 namespace RevisedPWApp.Models
 {
@@ -18,15 +18,17 @@ namespace RevisedPWApp.Models
         private readonly IAccountRepository _acc;
         private readonly IPasswordRepository _pwRepository;
         private const string DefaultFile = @"Resources\avatar.png";
-
+        private readonly ZipEncrypt zipper;
+        private string _password;
         public PasswordDisplayProps(IPasswordRepository pwRepository, IAccountRepository accRepository)
         {
             _acc = accRepository;
             _pwRepository = pwRepository;
+            zipper = new ZipEncrypt();
         }
 
         public int AccountUserId { get; set; }
-
+        
         public int LoginUser(string user, string password)
         {
 
@@ -35,6 +37,7 @@ namespace RevisedPWApp.Models
             var accountUser = _acc.GetRecordByCredentials(user, password);
             if (accountUser == null) return 0;//user is not in database
             AccountUserId = accountUser.UserId;
+            _password = password;
             return AccountUserId;//user found
         }
 
@@ -145,23 +148,24 @@ namespace RevisedPWApp.Models
             dataGrid.CurrentCell = dataGrid.Rows[index].Cells["Name"];
         }
 
-        public int CreateNewUserAccount(List<string> userData)
+        public int CreateNewUserAccount(LoginUser userData)
         {
             //check if user is in the database
             var accRec = GetAccountUser(userData);
             AccountUserId = _acc.InsertNewRecord(accRec);
+            _password = userData.Password;
             return AccountUserId;
         }
 
-        private static AccountUser GetAccountUser(List<string> userData)
+        private static AccountUser GetAccountUser(LoginUser userData)
         {
             var accRec = new AccountUser()
             {
-                Username = userData[0],
-                Password = userData[1],
-                FirstName = userData[2],
-                LastName = userData[3],
-                Pin = userData[4]
+                Username = userData.Username,
+                Password = userData.Password,
+                FirstName = userData.FirstName,
+                LastName = userData.LastName,
+                Pin = userData.Pin.ToString()
             };
             return accRec;
         }
@@ -177,10 +181,11 @@ namespace RevisedPWApp.Models
             LoadDataGrid(dataGrid, false);
         }
 
-        public int EditUserAccountData(List<string> credentials)
+        public int EditUserAccountData(LoginUser credentials)
         {
             var accRec = GetAccountUser(credentials);
             AccountUserId = _acc.EditEntry(accRec);
+            _password = credentials.Password;
             return AccountUserId;
         }
 
@@ -192,6 +197,7 @@ namespace RevisedPWApp.Models
             textFile.DestinationFile = Path.GetFileName(filename);
             var pin = GetLoggedInUser(AccountUserId).Pin;
             textFile.PlacePasswordRecordsInFile(pin, ShiftDirection.ShiftNone);
+            zipper.CreateZip(filename, _password, "myZippedPassFile.zip");
             return filename;
         }
 
@@ -203,15 +209,25 @@ namespace RevisedPWApp.Models
 
         public void SetPictureBoxImage(PictureBox picture, string imageFile)
         {
-            if (string.IsNullOrEmpty(imageFile))
+            try
             {
+                Cursor.Current = Cursors.WaitCursor;
+                picture.Image = string.IsNullOrEmpty(imageFile) 
+                ? Properties.Resources.avatar 
+                : Image.FromFile(@imageFile);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Your image was not found. Try a different file " +Environment.NewLine +
+                "location using the Select Image button.", "Image Not Found", 
+                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 picture.Image = Properties.Resources.avatar;
             }
-            else
+            finally
             {
-                picture.Image = Image.FromFile(@imageFile);
+                picture.SizeMode = PictureBoxSizeMode.StretchImage;
+                Cursor.Current = Cursors.Default;
             }
-            picture.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         public string GetPhotoLocationFromFile(IEmailAccountRepository emailAccount, int userId)

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using PasswordCore.Model;
 using PasswordCore.Interfaces;
 using PasswordCore.Repositories;
+using RevisedPWApp.Models;
 
 namespace RevisedPWApp.Interfaces
 {
@@ -16,9 +17,9 @@ namespace RevisedPWApp.Interfaces
         void LoadDataGrid(DataGridView dataGrid, bool isLoggedOut, List<Passwords> pList = null);
         void DeletePassword(DataGridView dataGrid);
         void EditPassword(int userId, DataGridView dataGrid, Passwords pwValues);
-        int CreateNewUserAccount(List<string> userData);
+        int CreateNewUserAccount(LoginUser userData);
         void AddNewPassword(int userId, DataGridView dataGrid, Passwords pw);
-        int EditUserAccountData(List<string> credentials);
+        int EditUserAccountData(LoginUser credentials);
         string PushPasswordsToFile(Display display, ITextFile text);
         string GetPasswordFromFile(Display display, ITextFile text, DataGridView grid);
         string GetPhotoLocationFromFile(IEmailAccountRepository emailAccount, int userId);

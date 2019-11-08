@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using PasswordCore.Interfaces;
+using RevisedPWApp.Models;
 
 namespace RevisedPWApp
 {
@@ -12,6 +13,7 @@ namespace RevisedPWApp
     {
         private readonly IDisplayProps _props;
         private readonly IDbConnector _connect;
+        private LoginUser _loginUser;
         public Login()
         {
             InitializeComponent();
@@ -21,6 +23,7 @@ namespace RevisedPWApp
         {
             _props = props;
             _connect = connector;
+            _loginUser = new LoginUser();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -59,19 +62,20 @@ namespace RevisedPWApp
                 MessageBox.Show(exception.Message, @"Invalid Entry Detected", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private List<string> CredentialsInitializer()
+        private LoginUser CredentialsInitializer()
         {
             if (txtPin.TextLength < 4)
                 throw new Exception("The Pin must be greater than 4 digits");
             if (!System.Text.RegularExpressions
                 .Regex.IsMatch(txtPin.Text, "^[0-9]+$"))
                 throw new Exception("Only digits [0 - 9] may be used!");
-            var accList = new List<string> { txtUsername.Text,txtPassword.Text,
-                txtFirstname.Text, txtLastname.Text, txtPin.Text
-            };
-            var credentials = accList.Any(string.IsNullOrEmpty) ? null : accList;
-            if (credentials == null) throw new IOException("Error in CredentialsInitializer");
-            return credentials;
+            
+            _loginUser.Username = txtUsername.Text;
+            _loginUser.Password = txtPassword.Text;
+            _loginUser.FirstName = txtFirstname.Text;
+            _loginUser.LastName = txtLastname.Text;
+            _loginUser.Pin = Convert.ToInt32(txtPin.Text);
+            return _loginUser;
         }
 
         private void Login_Load(object sender, EventArgs e)
