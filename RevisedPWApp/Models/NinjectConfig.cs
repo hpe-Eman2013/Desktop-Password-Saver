@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Ninject;
+﻿using Ninject;
 
 namespace RevisedPWApp.Models
 {
