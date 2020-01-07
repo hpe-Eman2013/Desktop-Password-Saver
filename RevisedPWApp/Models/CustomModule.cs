@@ -1,9 +1,8 @@
-﻿using Ninject;
-using Ninject.Modules;
-using PasswordCore.Interfaces;
-using PasswordCore.Repositories;
-using PasswordCore.Utilities;
+﻿using Ninject.Modules;
 using RevisedPWApp.Interfaces;
+using EncryptDecryptPassword;
+using FileZipperAndExtractor;
+using Model.Lib;
 
 namespace RevisedPWApp.Models
 {
@@ -11,13 +10,14 @@ namespace RevisedPWApp.Models
     {
         public override void Load()
         {
-            Bind<IDbConnector>().To<DbConnector>();
-            Bind<IAccountRepository>().To<AccountRepository>();
-            Bind<IPasswordRepository>().To<PasswordRepository>();
-            Bind<IEncryptor>().To<Encryptor>();
-            Bind<ITextFile>().To<TextFileRepository>();
+            Bind<IZipEncrypt>().To<ZipEncrypt>();
+            Bind<ISubscriberTracker>().To<SubscriberTracker>();
+            Bind<IModelAdapter<EmailAccount>>().To<SQLServerEmailAccount>();
+            Bind<IModelAdapter<UserAccount>>().To<SQLServerUserAccount>();
+            Bind<IModelAdapter<PasswordTracker>>().To<SQLServerPasswordAccount>();
+            Bind<IPasswordEncryption>().To<PasswordEncryption>();
+            Bind<ITextFileReadWriter>().To<SQLServerPasswordStorage>();
             Bind<IDisplayProps>().To<PasswordDisplayProps>();
-            Bind<IEmailAccountRepository>().To<EmailAccountRepository>();
         }
     }
 }

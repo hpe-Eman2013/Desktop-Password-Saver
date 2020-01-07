@@ -58,10 +58,6 @@
             this.gpEight = new System.Windows.Forms.RadioButton();
             this.chkUnmask = new System.Windows.Forms.CheckBox();
             this.dv = new System.Windows.Forms.DataGridView();
-            this.lblShiftDirection = new System.Windows.Forms.Label();
-            this.cboShift = new System.Windows.Forms.ComboBox();
-            this.lblShiftAmt = new System.Windows.Forms.Label();
-            this.txtShiftAmount = new System.Windows.Forms.TextBox();
             this.lblRetrieveFile = new System.Windows.Forms.Label();
             this.txtRetrieveFile = new System.Windows.Forms.TextBox();
             this.lblPushFile = new System.Windows.Forms.Label();
@@ -435,54 +431,6 @@
             this.dv.TabIndex = 19;
             this.dv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dv_CellClick);
             // 
-            // lblShiftDirection
-            // 
-            this.lblShiftDirection.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblShiftDirection.AutoSize = true;
-            this.lblShiftDirection.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblShiftDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShiftDirection.Location = new System.Drawing.Point(18, 425);
-            this.lblShiftDirection.Name = "lblShiftDirection";
-            this.lblShiftDirection.Size = new System.Drawing.Size(104, 18);
-            this.lblShiftDirection.TabIndex = 1;
-            this.lblShiftDirection.Text = "Shift Direction:";
-            // 
-            // cboShift
-            // 
-            this.cboShift.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cboShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboShift.FormattingEnabled = true;
-            this.cboShift.Items.AddRange(new object[] {
-            "None",
-            "Left",
-            "Right"});
-            this.cboShift.Location = new System.Drawing.Point(140, 422);
-            this.cboShift.Name = "cboShift";
-            this.cboShift.Size = new System.Drawing.Size(115, 26);
-            this.cboShift.TabIndex = 13;
-            // 
-            // lblShiftAmt
-            // 
-            this.lblShiftAmt.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblShiftAmt.AutoSize = true;
-            this.lblShiftAmt.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblShiftAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShiftAmt.Location = new System.Drawing.Point(263, 425);
-            this.lblShiftAmt.Name = "lblShiftAmt";
-            this.lblShiftAmt.Size = new System.Drawing.Size(38, 18);
-            this.lblShiftAmt.TabIndex = 1;
-            this.lblShiftAmt.Text = "Amt:";
-            // 
-            // txtShiftAmount
-            // 
-            this.txtShiftAmount.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtShiftAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtShiftAmount.Location = new System.Drawing.Point(300, 421);
-            this.txtShiftAmount.Multiline = true;
-            this.txtShiftAmount.Name = "txtShiftAmount";
-            this.txtShiftAmount.Size = new System.Drawing.Size(52, 27);
-            this.txtShiftAmount.TabIndex = 14;
-            // 
             // lblRetrieveFile
             // 
             this.lblRetrieveFile.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -597,12 +545,10 @@
             this.Controls.Add(this.dv);
             this.Controls.Add(this.chkUnmask);
             this.Controls.Add(this.grpPassword);
-            this.Controls.Add(this.cboShift);
             this.Controls.Add(this.cboSelectAction);
             this.Controls.Add(this.txtSearchList);
             this.Controls.Add(this.txtDateModified);
             this.Controls.Add(this.txtSpecialNotes);
-            this.Controls.Add(this.txtShiftAmount);
             this.Controls.Add(this.txtPushFile);
             this.Controls.Add(this.txtRetrieveFile);
             this.Controls.Add(this.txtDesc);
@@ -617,13 +563,11 @@
             this.Controls.Add(this.lblRetrieveFile);
             this.Controls.Add(this.SpecialNotes);
             this.Controls.Add(this.Description);
-            this.Controls.Add(this.lblShiftDirection);
             this.Controls.Add(this.AppPath);
             this.Controls.Add(this.SelectAction);
             this.Controls.Add(this.DateCreated);
             this.Controls.Add(this.Password);
             this.Controls.Add(this.Username);
-            this.Controls.Add(this.lblShiftAmt);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnClear);
@@ -673,10 +617,6 @@
         private System.Windows.Forms.RadioButton gpEight;
         private System.Windows.Forms.CheckBox chkUnmask;
         private System.Windows.Forms.DataGridView dv;
-        private System.Windows.Forms.Label lblShiftDirection;
-        private System.Windows.Forms.ComboBox cboShift;
-        private System.Windows.Forms.Label lblShiftAmt;
-        private System.Windows.Forms.TextBox txtShiftAmount;
         private System.Windows.Forms.Label lblRetrieveFile;
         private System.Windows.Forms.TextBox txtRetrieveFile;
         private System.Windows.Forms.Label lblPushFile;

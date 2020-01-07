@@ -4,37 +4,35 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using PasswordCore.Enums;
-using PasswordCore.Interfaces;
-using PasswordCore.Model;
-using PasswordCore.Repositories;
 using RevisedPWApp.Interfaces;
 using FileZipperAndExtractor;
+using Model.Lib;
 
 namespace RevisedPWApp.Models
 {
     public class PasswordDisplayProps : IDisplayProps
     {
-        private readonly IAccountRepository _acc;
-        private readonly IPasswordRepository _pwRepository;
         private const string DefaultFile = @"Resources\avatar.png";
-        private readonly ZipEncrypt zipper;
+        private IZipEncrypt _zipper;
+        private IModelAdapter<UserAccount> _userAccount;
+        private IModelAdapter<PasswordTracker> _pwTracker;
         private string _password;
-        public PasswordDisplayProps(IPasswordRepository pwRepository, IAccountRepository accRepository)
+        public PasswordDisplayProps(IModelAdapter<UserAccount> userAccount,
+            IModelAdapter<PasswordTracker> pwTracker, 
+            IZipEncrypt zipEncrypt)
         {
-            _acc = accRepository;
-            _pwRepository = pwRepository;
-            zipper = new ZipEncrypt();
+            _userAccount = userAccount;
+            _pwTracker = pwTracker;
+            _zipper = zipEncrypt;
         }
 
         public int AccountUserId { get; set; }
         
         public int LoginUser(string user, string password)
         {
-
             //check if user is in the database
             if (user == string.Empty || password == string.Empty) return 0;//invalid entry
-            var accountUser = _acc.GetRecordByCredentials(user, password);
+            var accountUser = _userAccount.GetRecordByCredentials(user, password);
             if (accountUser == null) return 0;//user is not in database
             AccountUserId = accountUser.UserId;
             _password = password;
@@ -55,7 +53,7 @@ namespace RevisedPWApp.Models
             LoadDataGrid(grid, false);
         }
 
-        public void LoadDataGrid(DataGridView dataGrid, bool isLoggedOut, List<Passwords> pList = null)
+        public void LoadDataGrid(DataGridView dataGrid, bool isLoggedOut, List<PasswordTracker> pList = null)
         {
             try
             {
@@ -65,8 +63,8 @@ namespace RevisedPWApp.Models
                 }
                 else
                 {
-                    _pwRepository.UserId = AccountUserId;
-                    dataGrid.DataSource = pList ?? _pwRepository.GetRecords();
+                    _pwTracker.Id = _pwTracker.Id == 0 ? AccountUserId : _pwTracker.Id;
+                    dataGrid.DataSource = pList ?? _pwTracker.GetRecords();
                     FillGrid(dataGrid);
                 }
             }
@@ -94,8 +92,8 @@ namespace RevisedPWApp.Models
             if (result != DialogResult.Yes) return;
             try
             {
-                var id = GetPasswordValues(dataGrid).Id;
-                _pwRepository.DeleteEntry(id);
+                var id = GetPasswordValues(dataGrid).ID;
+                _pwTracker.DeleteEntry(id);
                 MessageBox.Show(@"Record successfully deleted!", @"Record Deleted");
                 LoadDataGrid(dataGrid, false);
             }
@@ -105,12 +103,12 @@ namespace RevisedPWApp.Models
             }
         }
 
-        private Passwords GetPasswordValues(DataGridView dataGrid)
+        private PasswordTracker GetPasswordValues(DataGridView dataGrid)
         {
             try
             {
-                return _pwRepository.GetRecords().FirstOrDefault(
-                        p => p.Id == (int)dataGrid.Rows[dataGrid.CurrentCell.RowIndex].Cells["Id"].Value);
+                return _pwTracker.GetRecords().FirstOrDefault(
+                        p => p.ID == (int)dataGrid.Rows[dataGrid.CurrentCell.RowIndex].Cells["Id"].Value);
             }
             catch (Exception)
             {
@@ -118,12 +116,12 @@ namespace RevisedPWApp.Models
             }
         }
 
-        public void EditPassword(int userId, DataGridView dataGrid, Passwords pwValues)
+        public void EditPassword(int userId, DataGridView dataGrid, PasswordTracker pwValues)
         {
             try
             {
-                var id = GetPasswordValues(dataGrid).Id; //the ID of the modified row
-                _pwRepository.EditEntry(id, pwValues);
+                var id = GetPasswordValues(dataGrid).ID; //the ID of the modified row
+                _pwTracker.EditEntry(pwValues);
                 MessageBox.Show(@"Record successfully updated!", @"Record Edited");
                 //_entry.ResetEntryForm();
                 LoadDataGrid(dataGrid, false);
@@ -135,9 +133,9 @@ namespace RevisedPWApp.Models
             }
         }
 
-        public AccountUser GetLoggedInUser(int currentUser)
+        public UserAccount GetLoggedInUser(int currentUser)
         {
-            return _acc.GetRecords().FirstOrDefault(p => p.UserId == currentUser);
+            return _userAccount.GetRecords().FirstOrDefault(p => p.UserId == currentUser);
         }
 
         private void SetCurrentCell(DataGridView dataGrid, int rowId)
@@ -152,14 +150,14 @@ namespace RevisedPWApp.Models
         {
             //check if user is in the database
             var accRec = GetAccountUser(userData);
-            AccountUserId = _acc.InsertNewRecord(accRec);
+            AccountUserId = _userAccount.InsertNewRecord(accRec);
             _password = userData.Password;
             return AccountUserId;
         }
 
-        private static AccountUser GetAccountUser(LoginUser userData)
+        private static UserAccount GetAccountUser(LoginUser userData)
         {
-            var accRec = new AccountUser()
+            var accRec = new UserAccount
             {
                 Username = userData.Username,
                 Password = userData.Password,
@@ -170,12 +168,12 @@ namespace RevisedPWApp.Models
             return accRec;
         }
 
-        public void AddNewPassword(int userId, DataGridView dataGrid, Passwords pw)
+        public void AddNewPassword(int userId, DataGridView dataGrid, PasswordTracker pw)
         {
             if (string.IsNullOrEmpty(pw.Name) ||
                 string.IsNullOrEmpty(pw.Username) ||
                 string.IsNullOrEmpty(pw.Password)) throw new Exception("Required field(s) not filled out!");
-            _pwRepository.InsertNewRecord(pw);
+            _pwTracker.InsertNewRecord(pw);
             MessageBox.Show(@"Record successfully added!", @"Record Added");
             //_entry.ResetEntryForm();
             LoadDataGrid(dataGrid, false);
@@ -184,21 +182,15 @@ namespace RevisedPWApp.Models
         public int EditUserAccountData(LoginUser credentials)
         {
             var accRec = GetAccountUser(credentials);
-            AccountUserId = _acc.EditEntry(accRec);
+            AccountUserId = _userAccount.EditEntry(accRec).UserId;
             _password = credentials.Password;
             return AccountUserId;
         }
 
-        public string PushPasswordsToFile(Display display, ITextFile textFile)
+        public string PushPasswordsToFile(Display display, ITextFileReadWriter textFile)
         {
             var filename = SaveTextFile();
-            display.Controls["txtPushFile"].Text = filename;
-            textFile.DestinationFolder = $@"{Path.GetDirectoryName(filename)}\";
-            textFile.DestinationFile = Path.GetFileName(filename);
-            var pin = GetLoggedInUser(AccountUserId).Pin;
-            textFile.PlacePasswordRecordsInFile(pin, ShiftDirection.ShiftNone);
-            zipper.CreateZip(filename, _password, "myZippedPassFile.zip");
-            return filename;
+            return textFile.ZipPasswordsAndPlaceInFile(this.AccountUserId, filename);
         }
 
         private string SaveTextFile()
@@ -230,7 +222,7 @@ namespace RevisedPWApp.Models
             }
         }
 
-        public string GetPhotoLocationFromFile(IEmailAccountRepository emailAccount, int userId)
+        public string GetPhotoLocationFromFile(IModelAdapter<EmailAccount> emailAccount, int userId)
         {
             try
             {
@@ -238,7 +230,7 @@ namespace RevisedPWApp.Models
                 if (!File.Exists(fileName)) return DefaultFile;
                 var email = emailAccount.GetRecordById(userId);
                 email.PhotoLocation = fileName;
-                emailAccount.EditEntry(userId, email);
+                emailAccount.EditEntry(email);
                 return fileName;
             }
             catch (Exception)
@@ -249,13 +241,11 @@ namespace RevisedPWApp.Models
             
         }
 
-        public string GetPasswordFromFile(Display display, ITextFile text, DataGridView dvGrid)
+        public string GetPasswordFromFile(Display display, ITextFileReadWriter text, DataGridView dvGrid)
         {
             var filename = GetTextFile();
             if (!File.Exists(filename)) return string.Empty;
-            display.Controls["txtRetrieveFile"].Text = filename;
-            text.SourceFolder = Path.GetDirectoryName(filename);
-            text.AddPasswordListToDb();
+            text.AddPasswordFileToRepository(filename);
             LoadDataGrid(dvGrid, false);
             return filename;
         }

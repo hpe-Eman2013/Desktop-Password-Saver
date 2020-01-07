@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using Ninject;
-using PasswordCore.Interfaces;
-using PasswordCore.Repositories;
 using RevisedPWApp.Interfaces;
 using RevisedPWApp.Models;
+using EncryptDecryptPassword;
+using FileZipperAndExtractor;
+using Model.Lib;
 
 namespace RevisedPWApp
 {
@@ -20,12 +21,20 @@ namespace RevisedPWApp
             Application.SetCompatibleTextRenderingDefault(false);
             NinjectConfig.CreateKernel();
             var kernel = NinjectConfig.Kernel;
+            
+            IPasswordEncryption encryption = kernel.Get<IPasswordEncryption>();
+            IZipEncrypt zipper = kernel.Get<IZipEncrypt>();
+            IModelAdapter<EmailAccount> email = kernel.Get<IModelAdapter<EmailAccount>>();
+            IModelAdapter<UserAccount> userAccount = 
+                kernel.Get<IModelAdapter<UserAccount>>();
+            IModelAdapter<PasswordTracker> pwTracker =
+                kernel.Get<IModelAdapter<PasswordTracker>>();
+            ITextFileReadWriter reader = kernel.Get<ITextFileReadWriter>();
             IDisplayProps props = kernel.Get<IDisplayProps>();
-            IDbConnector connector = kernel.Get<IDbConnector>();
-            IPasswordRepository repo = kernel.Get<IPasswordRepository>();
-            ITextFile textFile = kernel.Get<ITextFile>();
-            IEmailAccountRepository emailAccount = kernel.Get<IEmailAccountRepository>();
-            Application.Run(new Display(props, connector, repo, textFile, emailAccount));
+            ISubscriberTracker tracker = kernel.Get<ISubscriberTracker>();
+            tracker.Subscribe(email);
+            tracker.Subscribe(pwTracker);
+            Application.Run(new Display(props, encryption, zipper, email, userAccount, pwTracker, reader));
         }
     }
 }

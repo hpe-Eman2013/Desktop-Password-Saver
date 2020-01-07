@@ -1,17 +1,16 @@
-﻿using Ninject;
+﻿using Model.Lib;
+using Ninject;
 
 namespace RevisedPWApp.Models
 {
     public static class NinjectConfig
     {
-        private static IKernel _kernel;
-
         public static void CreateKernel()
         {
-            _kernel = new StandardKernel();
-            _kernel.Load(new CustomModule());
+            Kernel = new StandardKernel();
+            Kernel.Load(new CustomModule());
         }
 
-        public static IKernel Kernel => _kernel;
+        public static IKernel Kernel { get; private set; }
     }
 }

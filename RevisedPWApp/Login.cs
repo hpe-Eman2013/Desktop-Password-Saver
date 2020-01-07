@@ -1,29 +1,25 @@
 ﻿using RevisedPWApp.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
-using PasswordCore.Interfaces;
-using RevisedPWApp.Models;
+using Model.Lib;
 
 namespace RevisedPWApp
 {
     public partial class Login : Form
     {
         private readonly IDisplayProps _props;
-        private readonly IDbConnector _connect;
-        private LoginUser _loginUser;
+        private string choice;
+        private IModelAdapter<UserAccount> userAccount;
+        public int UserAccountId { get; set; }
         public Login()
         {
             InitializeComponent();
         }
 
-        public Login(IDisplayProps props, IDbConnector connector) : this()
+        public Login(IDisplayProps props, IModelAdapter<UserAccount> userAdapter) : this()
         {
             _props = props;
-            _connect = connector;
-            _loginUser = new LoginUser();
+            userAccount = userAdapter;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -37,22 +33,21 @@ namespace RevisedPWApp
         {
             try
             {
-                switch (_connect.ConfigDictionary.Where(v => v.Value == btnLogin.Text).Select(x => x.Value).FirstOrDefault())
+                switch (choice)
                 {
-                    case "Add User":
-                        _props.CreateNewUserAccount(CredentialsInitializer());
-                        if (_props.AccountUserId == 0) throw new Exception("Error creating user!");
+                    case "Add":
+                        UserAccountId = userAccount.InsertNewRecord(CredentialsInitializer());
+                        if (UserAccountId == 0) throw new Exception("Error creating user!");
                         break;
-                    case "Edit User":
-                        _props.EditUserAccountData(CredentialsInitializer());
-                        if (_props.AccountUserId == 0) throw new Exception("Error editing user!");
-                        break;
-                    case "Login":
-                        _props.LoginUser(txtUsername.Text, txtPassword.Text);
-                        if (_props.AccountUserId == 0) throw new Exception("Invalid login!");
+                    case "Edit":
+                        UserAccountId = userAccount.EditEntry(CredentialsInitializer()).UserId;
+                        if (UserAccountId == 0) throw new Exception("Error editing user!");
                         break;
                     default:
-                        throw new Exception("Error in LoginUserFromForm");
+                        var user = userAccount.GetRecordByCredentials(txtUsername.Text, txtPassword.Text);
+                        if (user == null) throw new Exception("Invalid login!");
+                        UserAccountId = user.UserId;
+                        break;
                 }
                 Close();
             }
@@ -62,20 +57,22 @@ namespace RevisedPWApp
                 MessageBox.Show(exception.Message, @"Invalid Entry Detected", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private LoginUser CredentialsInitializer()
+        private UserAccount CredentialsInitializer()
         {
             if (txtPin.TextLength < 4)
                 throw new Exception("The Pin must be greater than 4 digits");
             if (!System.Text.RegularExpressions
                 .Regex.IsMatch(txtPin.Text, "^[0-9]+$"))
                 throw new Exception("Only digits [0 - 9] may be used!");
-            
-            _loginUser.Username = txtUsername.Text;
-            _loginUser.Password = txtPassword.Text;
-            _loginUser.FirstName = txtFirstname.Text;
-            _loginUser.LastName = txtLastname.Text;
-            _loginUser.Pin = Convert.ToInt32(txtPin.Text);
-            return _loginUser;
+            var accUser = new UserAccount
+            {
+                Username = txtUsername.Text,
+                Password = txtPassword.Text,
+                FirstName = txtFirstname.Text,
+                LastName = txtLastname.Text,
+                Pin = txtPin.Text
+            };
+            return accUser;
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -97,8 +94,8 @@ namespace RevisedPWApp
             else
             {
                 HideControls();
-                LoginTitle.Text = _connect.ConfigDictionary.FirstOrDefault(x => x.Key.Contains("loginUserTitle")).Value;
-                btnLogin.Text = _connect.ConfigDictionary.FirstOrDefault(x => x.Key.Contains("loginUser")).Value;
+                LoginTitle.Text = "Login User";
+                btnLogin.Text = "Login";
             }
             txtUsername.Select();
         }
@@ -122,14 +119,14 @@ namespace RevisedPWApp
         }
         private void EditExistingUser()
         {
-            LoginTitle.Text = _connect.ConfigDictionary.FirstOrDefault(x => x.Key.Contains("editUserTitle")).Value;
-            btnLogin.Text = _connect.ConfigDictionary.FirstOrDefault(x => x.Key.Contains("editUser")).Value;
+            LoginTitle.Text = "Edit User";
+            btnLogin.Text = "Edit";
         }
 
         private void CreateNewUser()
         {
-            LoginTitle.Text = _connect.ConfigDictionary.FirstOrDefault(x => x.Key.Contains("addUserTitle")).Value;
-            btnLogin.Text = _connect.ConfigDictionary.FirstOrDefault(x => x.Key.Contains("addUser")).Value;
+            LoginTitle.Text = "Add User";
+            btnLogin.Text = "Add";
         }
 
         private void MakeControlsVisible()
@@ -144,11 +141,13 @@ namespace RevisedPWApp
         private void lnkCreateUser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FormSetup(false, true);
+            choice = "Add";
         }
 
         private void lnkEditUser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FormSetup(true, false);
+            choice = "Edit";
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using PasswordCore.Model;
-using PasswordCore.Interfaces;
-using PasswordCore.Repositories;
 using RevisedPWApp.Models;
+using Model.Lib;
 
 namespace RevisedPWApp.Interfaces
 {
@@ -12,17 +10,17 @@ namespace RevisedPWApp.Interfaces
         int AccountUserId { get; set; }
         int LoginUser(string user, string password);
         void LogoutUser(DataGridView grid);
-        AccountUser GetLoggedInUser(int currentUser);
+        UserAccount GetLoggedInUser(int currentUser);
         void ClearFormData(Form form, DataGridView grid);
-        void LoadDataGrid(DataGridView dataGrid, bool isLoggedOut, List<Passwords> pList = null);
+        void LoadDataGrid(DataGridView dataGrid, bool isLoggedOut, List<PasswordTracker> pList = null);
         void DeletePassword(DataGridView dataGrid);
-        void EditPassword(int userId, DataGridView dataGrid, Passwords pwValues);
+        void EditPassword(int userId, DataGridView dataGrid, PasswordTracker pwValues);
         int CreateNewUserAccount(LoginUser userData);
-        void AddNewPassword(int userId, DataGridView dataGrid, Passwords pw);
+        void AddNewPassword(int userId, DataGridView dataGrid, PasswordTracker pw);
         int EditUserAccountData(LoginUser credentials);
-        string PushPasswordsToFile(Display display, ITextFile text);
-        string GetPasswordFromFile(Display display, ITextFile text, DataGridView grid);
-        string GetPhotoLocationFromFile(IEmailAccountRepository emailAccount, int userId);
+        string PushPasswordsToFile(Display display, ITextFileReadWriter textFile);
+        string GetPasswordFromFile(Display display, ITextFileReadWriter text, DataGridView grid);
+        string GetPhotoLocationFromFile(IModelAdapter<EmailAccount> emailAccount, int userId);
         void SetPictureBoxImage(PictureBox picture, string imageFile);
     }
 }

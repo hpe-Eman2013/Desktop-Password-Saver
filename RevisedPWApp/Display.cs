@@ -1,43 +1,53 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using PasswordCore.Enums;
-using PasswordCore.Interfaces;
-using PasswordCore.Model;
-using PasswordCore.Repositories;
 using RevisedPWApp.Interfaces;
+using Model.Lib;
+using EncryptDecryptPassword;
+using FileZipperAndExtractor;
 
 namespace RevisedPWApp
 {
     public partial class Display : Form
     {
         private readonly Login _loginForm;
+        private int recordId;
         private readonly IDisplayProps _props;
-        private readonly IPasswordRepository _passwordRepository;
-        private readonly ITextFile _text;
-        private readonly IEmailAccountRepository _email;
+        private readonly IModelAdapter<PasswordTracker> _pwTracker;
+        private readonly IModelAdapter<EmailAccount> _email;
+        private readonly IModelAdapter<UserAccount> _userAccount;
+        private IPasswordEncryption _encryptDecrypt;
+        private IZipEncrypt _zipper;
+        private ITextFileReadWriter _readerWriter;
         public Display()
         {
             InitializeComponent();
         }
 
-        public Display(IDisplayProps props, IDbConnector connect,
-            IPasswordRepository repository, ITextFile textFile,
-            IEmailAccountRepository email) : this()
+        public Display(IDisplayProps props, IPasswordEncryption encryption, 
+           IZipEncrypt zipper, IModelAdapter<EmailAccount> email, 
+           IModelAdapter<UserAccount> userAccount, 
+           IModelAdapter<PasswordTracker> pwTracker, 
+           ITextFileReadWriter readerWriter) : this()
         {
             _props = props;
-            _passwordRepository = repository;
-            _text = textFile;
+            _pwTracker = pwTracker;
             _email = email;
-            _loginForm = new Login(_props, connect);
+            _userAccount = userAccount;
+            _zipper = zipper;
+            _encryptDecrypt = encryption;
+            _readerWriter = readerWriter;
+            _loginForm = new Login(_props, userAccount);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             _loginForm.ShowDialog();
-            if (_props.AccountUserId == 0) return;//user is not present
+            if (_loginForm.UserAccountId == 0) return;//user is not present
+            _props.AccountUserId = _loginForm.UserAccountId;
+            _pwTracker.Id = _loginForm.UserAccountId;
             _props.LoadDataGrid(dv, false);
-            var imageLocation = _email.GetRecordById(_props.AccountUserId);
+            var imageLocation = _email.GetRecordById(_loginForm.UserAccountId);
             if (string.IsNullOrEmpty(imageLocation.PhotoLocation)) return;
             _props.SetPictureBoxImage(pbAvatar, imageLocation.PhotoLocation);
         }
@@ -45,7 +55,7 @@ namespace RevisedPWApp
         private void btnLogout_Click(object sender, EventArgs e)
         {
             _props.ClearFormData(this, dv);
-            _props.AccountUserId = 0;
+            _loginForm.UserAccountId = 0;
             _props.SetPictureBoxImage(pbAvatar, "");
             _props.LoadDataGrid(dv, true);
         }
@@ -62,12 +72,12 @@ namespace RevisedPWApp
 
         private void btnPushFile_Click(object sender, EventArgs e)
         {
-            txtPushFile.Text = _props.PushPasswordsToFile(this, _text);
+            txtPushFile.Text = _props.PushPasswordsToFile(this, _readerWriter);
         }
 
         private void btnGetFile_Click(object sender, EventArgs e)
         {
-            txtRetrieveFile.Text = _props.GetPasswordFromFile(this, _text, dv);
+            txtRetrieveFile.Text = _props.GetPasswordFromFile(this, _readerWriter, dv);
         }
 
         private void chkUnmask_CheckedChanged(object sender, EventArgs e)
@@ -75,10 +85,11 @@ namespace RevisedPWApp
             txtPassword.PasswordChar = chkUnmask.Checked ? '\0' : '*';
         }
 
-        private Passwords GetPasswordValues()
+        private PasswordTracker GetPasswordValues()
         {
-            var pw = new Passwords()
+            var pw = new PasswordTracker()
             {
+                ID = recordId,
                 Name = txtName.Text,
                 Username = txtUsername.Text,
                 Password = txtPassword.Text,
@@ -97,17 +108,17 @@ namespace RevisedPWApp
 
         private void gpEight_Click(object sender, EventArgs e)
         {
-            txtPassword.Text = _passwordRepository.GetRandomPassword(PasswordStrength.Normal);
+            txtPassword.Text = _encryptDecrypt.GetRandomAsciiString(PasswordStrength.Normal);
         }
 
         private void gpTen_Click(object sender, EventArgs e)
         {
-            txtPassword.Text = _passwordRepository.GetRandomPassword(PasswordStrength.Strong);
+            txtPassword.Text = _encryptDecrypt.GetRandomAsciiString(PasswordStrength.Strong);
         }
 
         private void gpFifteen_Click(object sender, EventArgs e)
         {
-            txtPassword.Text = _passwordRepository.GetRandomPassword(PasswordStrength.VeryStrong);
+            txtPassword.Text = _encryptDecrypt.GetRandomAsciiString(PasswordStrength.VeryStrong);
         }
 
         private void cboSelectAction_SelectionChangeCommitted(object sender, EventArgs e)
@@ -115,18 +126,19 @@ namespace RevisedPWApp
             switch (cboSelectAction.SelectedIndex)
             {
                 case 0: // add new
-                    if (_props.AccountUserId < 1)
+                    if (_loginForm.UserAccountId < 1)
                         throw new Exception("Login is required!");
                     else
                     {
-                        _props.AddNewPassword(_props.AccountUserId, dv, GetPasswordValues());
+                        _pwTracker.InsertNewRecord(GetPasswordValues());
                         break;
                     }
                 case 1: // edit
-                    _props.EditPassword(_props.AccountUserId, dv, GetPasswordValues());
+                    _pwTracker.EditEntry(GetPasswordValues());
                     break;
                 case 2: // delete
-                    _props.DeletePassword(dv);
+                    var id = (int)dv.Rows[dv.CurrentCell.RowIndex].Cells["Id"].Value;
+                    _pwTracker.DeleteEntry(id);
                     break;
             }
             ClearSelection();
@@ -142,6 +154,7 @@ namespace RevisedPWApp
         {
             if (dv.CurrentCell.RowIndex == -1) return;
             var currentRow = dv.CurrentCell.RowIndex;
+            recordId = (int) dv.Rows[currentRow].Cells["ID"].Value;
             txtName.Text = dv.Rows[currentRow].Cells["Name"].Value.ToString();
             txtUsername.Text = dv.Rows[currentRow].Cells["Username"].Value.ToString();
             txtPassword.Text = dv.Rows[currentRow].Cells["Password"].Value.ToString();
@@ -155,12 +168,11 @@ namespace RevisedPWApp
 
         private void txtSearchList_TextChanged(object sender, EventArgs e)
         {
-            if (_props.AccountUserId <= 0) return;
+            if (_loginForm.UserAccountId <= 0) return;
             //getting data from a datagridview
             //var result = dv.Rows.OfType<DataGridViewRow>().Select(
             //    r => r.Cells.OfType<DataGridViewCell>().Select(c => c.Value).ToArray()).ToList();
-            _passwordRepository.UserId = _props.AccountUserId;
-            var result = _passwordRepository.GetRecords();
+            var result = _pwTracker.GetRecords();
             var selection = result.Where(x => x.Name.ToUpper().StartsWith(txtSearchList.Text.ToUpper()))
                 .ToList();
             _props.LoadDataGrid(dv, false, selection);
