@@ -146,7 +146,7 @@ namespace RevisedPWApp.Models
             dataGrid.CurrentCell = dataGrid.Rows[index].Cells["Name"];
         }
 
-        public int CreateNewUserAccount(LoginUser userData)
+        public int CreateNewUserAccount(UserAccount userData)
         {
             //check if user is in the database
             var accRec = GetAccountUser(userData);
@@ -155,7 +155,7 @@ namespace RevisedPWApp.Models
             return AccountUserId;
         }
 
-        private static UserAccount GetAccountUser(LoginUser userData)
+        private static UserAccount GetAccountUser(UserAccount userData)
         {
             var accRec = new UserAccount
             {
@@ -179,7 +179,7 @@ namespace RevisedPWApp.Models
             LoadDataGrid(dataGrid, false);
         }
 
-        public int EditUserAccountData(LoginUser credentials)
+        public int EditUserAccountData(UserAccount credentials)
         {
             var accRec = GetAccountUser(credentials);
             AccountUserId = _userAccount.EditEntry(accRec).UserId;

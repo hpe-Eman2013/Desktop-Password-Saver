@@ -170,7 +170,6 @@
       <DependentUpon>ModelContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomModule.cs" />
-    <Compile Include="Models\LoginUser.cs" />
     <Compile Include="Models\NinjectConfig.cs" />
     <Compile Include="Models\PasswordDisplayProps.cs" />
     <Compile Include="Program.cs" />

@@ -15,9 +15,9 @@ namespace RevisedPWApp.Interfaces
         void LoadDataGrid(DataGridView dataGrid, bool isLoggedOut, List<PasswordTracker> pList = null);
         void DeletePassword(DataGridView dataGrid);
         void EditPassword(int userId, DataGridView dataGrid, PasswordTracker pwValues);
-        int CreateNewUserAccount(LoginUser userData);
+        int CreateNewUserAccount(UserAccount userData);
         void AddNewPassword(int userId, DataGridView dataGrid, PasswordTracker pw);
-        int EditUserAccountData(LoginUser credentials);
+        int EditUserAccountData(UserAccount credentials);
         string PushPasswordsToFile(Display display, ITextFileReadWriter textFile);
         string GetPasswordFromFile(Display display, ITextFileReadWriter text, DataGridView grid);
         string GetPhotoLocationFromFile(IModelAdapter<EmailAccount> emailAccount, int userId);
