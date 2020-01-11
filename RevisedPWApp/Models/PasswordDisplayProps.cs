@@ -27,17 +27,6 @@ namespace RevisedPWApp.Models
         }
 
         public int AccountUserId { get; set; }
-        
-        public int LoginUser(string user, string password)
-        {
-            //check if user is in the database
-            if (user == string.Empty || password == string.Empty) return 0;//invalid entry
-            var accountUser = _userAccount.GetRecordByCredentials(user, password);
-            if (accountUser == null) return 0;//user is not in database
-            AccountUserId = accountUser.UserId;
-            _password = password;
-            return AccountUserId;//user found
-        }
 
         public void LogoutUser(DataGridView grid)
         {
@@ -84,25 +73,7 @@ namespace RevisedPWApp.Models
             }
             dataGrid.Font = new Font("Arial", 11);
         }
-
-        public void DeletePassword(DataGridView dataGrid)
-        {
-            var result = MessageBox.Show(@"Are you sure you want to delete the selection?", @"Deleting?",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (result != DialogResult.Yes) return;
-            try
-            {
-                var id = GetPasswordValues(dataGrid).ID;
-                _pwTracker.DeleteEntry(id);
-                MessageBox.Show(@"Record successfully deleted!", @"Record Deleted");
-                LoadDataGrid(dataGrid, false);
-            }
-            catch (Exception)
-            {
-                throw new Exception("Record not delete due to application error!");
-            }
-        }
-
+        
         private PasswordTracker GetPasswordValues(DataGridView dataGrid)
         {
             try
@@ -115,24 +86,7 @@ namespace RevisedPWApp.Models
                 throw new Exception("No row was selected!");
             }
         }
-
-        public void EditPassword(int userId, DataGridView dataGrid, PasswordTracker pwValues)
-        {
-            try
-            {
-                var id = GetPasswordValues(dataGrid).ID; //the ID of the modified row
-                _pwTracker.EditEntry(pwValues);
-                MessageBox.Show(@"Record successfully updated!", @"Record Edited");
-                //_entry.ResetEntryForm();
-                LoadDataGrid(dataGrid, false);
-                SetCurrentCell(dataGrid, id);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, @"Record Not Edited");
-            }
-        }
-
+        
         public UserAccount GetLoggedInUser(int currentUser)
         {
             return _userAccount.GetRecords().FirstOrDefault(p => p.UserId == currentUser);
@@ -145,16 +99,7 @@ namespace RevisedPWApp.Models
                 .Select(r => r.Index)).FirstOrDefault();
             dataGrid.CurrentCell = dataGrid.Rows[index].Cells["Name"];
         }
-
-        public int CreateNewUserAccount(UserAccount userData)
-        {
-            //check if user is in the database
-            var accRec = GetAccountUser(userData);
-            AccountUserId = _userAccount.InsertNewRecord(accRec);
-            _password = userData.Password;
-            return AccountUserId;
-        }
-
+        
         private static UserAccount GetAccountUser(UserAccount userData)
         {
             var accRec = new UserAccount
@@ -167,26 +112,7 @@ namespace RevisedPWApp.Models
             };
             return accRec;
         }
-
-        public void AddNewPassword(int userId, DataGridView dataGrid, PasswordTracker pw)
-        {
-            if (string.IsNullOrEmpty(pw.Name) ||
-                string.IsNullOrEmpty(pw.Username) ||
-                string.IsNullOrEmpty(pw.Password)) throw new Exception("Required field(s) not filled out!");
-            _pwTracker.InsertNewRecord(pw);
-            MessageBox.Show(@"Record successfully added!", @"Record Added");
-            //_entry.ResetEntryForm();
-            LoadDataGrid(dataGrid, false);
-        }
-
-        public int EditUserAccountData(UserAccount credentials)
-        {
-            var accRec = GetAccountUser(credentials);
-            AccountUserId = _userAccount.EditEntry(accRec).UserId;
-            _password = credentials.Password;
-            return AccountUserId;
-        }
-
+        
         public string PushPasswordsToFile(Display display, ITextFileReadWriter textFile)
         {
             var filename = SaveTextFile();
