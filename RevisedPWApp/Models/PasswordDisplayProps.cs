@@ -16,7 +16,6 @@ namespace RevisedPWApp.Models
         private IZipEncrypt _zipper;
         private IModelAdapter<UserAccount> _userAccount;
         private IModelAdapter<PasswordTracker> _pwTracker;
-        private string _password;
         public PasswordDisplayProps(IModelAdapter<UserAccount> userAccount,
             IModelAdapter<PasswordTracker> pwTracker, 
             IZipEncrypt zipEncrypt)
@@ -180,6 +179,11 @@ namespace RevisedPWApp.Models
         {
             OpenFileDialog fileDialog = new OpenFileDialog { Title = @"Open Text File" };
             return fileDialog.ShowDialog() == DialogResult.OK ? fileDialog.FileName : string.Empty;
+        }
+
+        public void Update(IModelAdapter<UserAccount> adapter)
+        {
+            AccountUserId = adapter.Id;
         }
     }
 }

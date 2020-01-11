@@ -19,6 +19,7 @@ namespace RevisedPWApp
         private IPasswordEncryption _encryptDecrypt;
         private IZipEncrypt _zipper;
         private ITextFileReadWriter _readerWriter;
+        private ISubscriberTracker _subscriber;
         public Display()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace RevisedPWApp
            IZipEncrypt zipper, IModelAdapter<EmailAccount> email, 
            IModelAdapter<UserAccount> userAccount, 
            IModelAdapter<PasswordTracker> pwTracker, 
-           ITextFileReadWriter readerWriter) : this()
+           ITextFileReadWriter readerWriter, ISubscriberTracker tracker) : this()
         {
             _props = props;
             _pwTracker = pwTracker;
@@ -37,15 +38,15 @@ namespace RevisedPWApp
             _zipper = zipper;
             _encryptDecrypt = encryption;
             _readerWriter = readerWriter;
+            _subscriber = tracker;
             _loginForm = new Login(_props, userAccount);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            _subscriber.Subscribe(_props);
             _loginForm.ShowDialog();
             if (_loginForm.UserAccountId == 0) return;//user is not present
-            _props.AccountUserId = _loginForm.UserAccountId;
-            _pwTracker.Id = _loginForm.UserAccountId;
             _props.LoadDataGrid(dv, false);
             var imageLocation = _email.GetRecordById(_loginForm.UserAccountId);
             if (string.IsNullOrEmpty(imageLocation.PhotoLocation)) return;
@@ -55,7 +56,7 @@ namespace RevisedPWApp
         private void btnLogout_Click(object sender, EventArgs e)
         {
             _props.ClearFormData(this, dv);
-            _loginForm.UserAccountId = 0;
+            _userAccount.Id = 0;
             _props.SetPictureBoxImage(pbAvatar, "");
             _props.LoadDataGrid(dv, true);
         }

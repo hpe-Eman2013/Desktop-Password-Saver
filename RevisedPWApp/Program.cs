@@ -34,7 +34,7 @@ namespace RevisedPWApp
             ISubscriberTracker tracker = kernel.Get<ISubscriberTracker>();
             tracker.Subscribe(email);
             tracker.Subscribe(pwTracker);
-            Application.Run(new Display(props, encryption, zipper, email, userAccount, pwTracker, reader));
+            Application.Run(new Display(props, encryption, zipper, email, userAccount, pwTracker, reader, tracker));
         }
     }
 }

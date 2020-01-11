@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using RevisedPWApp.Models;
 using Model.Lib;
+
 
 namespace RevisedPWApp.Interfaces
 {
-    public interface IDisplayProps
+    public interface IDisplayProps : IObserver
     {
         int AccountUserId { get; set; }
         void LogoutUser(DataGridView grid);
