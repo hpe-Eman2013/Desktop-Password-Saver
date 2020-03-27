@@ -61,7 +61,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>8C26B191707EC392E2B952B439D9F651BA11F556</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2F3970947130AFCB8F6C5F175721326C00AE5350</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>RevisedPWApp_TemporaryKey.pfx</ManifestKeyFile>
@@ -89,6 +89,7 @@
     <Reference Include="Model.Lib, Version=1.3.3.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Model.Lib.1.3.3.2\lib\net472\Model.Lib.dll</HintPath>
     </Reference>
+    <Reference Include="netstandard" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -205,6 +206,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="RevisedPWApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\passwordKey.jpg" />
