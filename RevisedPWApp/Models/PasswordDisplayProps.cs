@@ -64,7 +64,7 @@ namespace RevisedPWApp.Models
                 else
                 {
                     _pwTracker.Id = _pwTracker.Id == 0 ? AccountUserId : _pwTracker.Id;
-                    dataGrid.DataSource = pList ?? _pwTracker.GetRecords();
+                    dataGrid.DataSource = pList ??_pwTracker.GetRecords();
                     FillGrid(dataGrid);
                 }
             }
@@ -241,13 +241,12 @@ namespace RevisedPWApp.Models
             
         }
 
-        public string GetPasswordFromFile(Display display, ITextFileReadWriter text, DataGridView dvGrid)
+        public void GetPasswordFromFile(Display display, ITextFileReadWriter text, DataGridView dvGrid)
         {
             var filename = GetTextFile();
-            if (!File.Exists(filename)) return string.Empty;
-            text.AddPasswordFileToRepository(filename);
+            if (!File.Exists(filename)) return;
+            text.AddPasswordFileToRepository(filename, AccountUserId);
             LoadDataGrid(dvGrid, false);
-            return filename;
         }
 
         private string GetTextFile()

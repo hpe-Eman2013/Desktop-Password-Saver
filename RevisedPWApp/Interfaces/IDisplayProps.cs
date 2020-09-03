@@ -19,7 +19,7 @@ namespace RevisedPWApp.Interfaces
         void AddNewPassword(int userId, DataGridView dataGrid, PasswordTracker pw);
         int EditUserAccountData(LoginUser credentials);
         string PushPasswordsToFile(Display display, ITextFileReadWriter textFile);
-        string GetPasswordFromFile(Display display, ITextFileReadWriter text, DataGridView grid);
+        void GetPasswordFromFile(Display display, ITextFileReadWriter text, DataGridView grid);
         string GetPhotoLocationFromFile(IModelAdapter<EmailAccount> emailAccount, int userId);
         void SetPictureBoxImage(PictureBox picture, string imageFile);
     }

@@ -59,7 +59,6 @@
             this.chkUnmask = new System.Windows.Forms.CheckBox();
             this.dv = new System.Windows.Forms.DataGridView();
             this.lblRetrieveFile = new System.Windows.Forms.Label();
-            this.txtRetrieveFile = new System.Windows.Forms.TextBox();
             this.lblPushFile = new System.Windows.Forms.Label();
             this.txtPushFile = new System.Windows.Forms.TextBox();
             this.btnGetFile = new System.Windows.Forms.Button();
@@ -443,19 +442,6 @@
             this.lblRetrieveFile.TabIndex = 1;
             this.lblRetrieveFile.Text = "Retrieve File:";
             // 
-            // txtRetrieveFile
-            // 
-            this.txtRetrieveFile.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtRetrieveFile.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.txtRetrieveFile.Enabled = false;
-            this.txtRetrieveFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRetrieveFile.Location = new System.Drawing.Point(140, 362);
-            this.txtRetrieveFile.Multiline = true;
-            this.txtRetrieveFile.Name = "txtRetrieveFile";
-            this.txtRetrieveFile.Size = new System.Drawing.Size(213, 53);
-            this.txtRetrieveFile.TabIndex = 11;
-            this.txtRetrieveFile.TabStop = false;
-            // 
             // lblPushFile
             // 
             this.lblPushFile.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -486,7 +472,7 @@
             this.btnGetFile.BackgroundImage = global::RevisedPWApp.Properties.Resources.downloadFile;
             this.btnGetFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnGetFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGetFile.Location = new System.Drawing.Point(359, 362);
+            this.btnGetFile.Location = new System.Drawing.Point(140, 360);
             this.btnGetFile.Name = "btnGetFile";
             this.btnGetFile.Size = new System.Drawing.Size(53, 53);
             this.btnGetFile.TabIndex = 12;
@@ -550,7 +536,6 @@
             this.Controls.Add(this.txtDateModified);
             this.Controls.Add(this.txtSpecialNotes);
             this.Controls.Add(this.txtPushFile);
-            this.Controls.Add(this.txtRetrieveFile);
             this.Controls.Add(this.txtDesc);
             this.Controls.Add(this.txtAppPath);
             this.Controls.Add(this.txtDateCreated);
@@ -618,7 +603,6 @@
         private System.Windows.Forms.CheckBox chkUnmask;
         private System.Windows.Forms.DataGridView dv;
         private System.Windows.Forms.Label lblRetrieveFile;
-        private System.Windows.Forms.TextBox txtRetrieveFile;
         private System.Windows.Forms.Label lblPushFile;
         private System.Windows.Forms.TextBox txtPushFile;
         private System.Windows.Forms.Button btnGetFile;

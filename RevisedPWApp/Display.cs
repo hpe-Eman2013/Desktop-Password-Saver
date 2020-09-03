@@ -48,7 +48,7 @@ namespace RevisedPWApp
             _pwTracker.Id = _loginForm.UserAccountId;
             _props.LoadDataGrid(dv, false);
             var imageLocation = _email.GetRecordById(_loginForm.UserAccountId);
-            if (string.IsNullOrEmpty(imageLocation.PhotoLocation)) return;
+            if (imageLocation == null) return;
             _props.SetPictureBoxImage(pbAvatar, imageLocation.PhotoLocation);
         }
 
@@ -77,7 +77,7 @@ namespace RevisedPWApp
 
         private void btnGetFile_Click(object sender, EventArgs e)
         {
-            txtRetrieveFile.Text = _props.GetPasswordFromFile(this, _readerWriter, dv);
+            _props.GetPasswordFromFile(this, _readerWriter, dv);
         }
 
         private void chkUnmask_CheckedChanged(object sender, EventArgs e)
