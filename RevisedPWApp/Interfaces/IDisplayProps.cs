@@ -20,6 +20,7 @@ namespace RevisedPWApp.Interfaces
         int EditUserAccountData(LoginUser credentials);
         string PushPasswordsToFile(Display display, ITextFileReadWriter textFile);
         void GetPasswordFromFile(Display display, ITextFileReadWriter text, DataGridView grid);
+        void SetEmailAccount(string emailAddress, IModelAdapter<EmailAccount> emailAccount);
         string GetPhotoLocationFromFile(IModelAdapter<EmailAccount> emailAccount, int userId);
         void SetPictureBoxImage(PictureBox picture, string imageFile);
     }

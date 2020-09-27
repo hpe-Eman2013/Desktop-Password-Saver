@@ -2,24 +2,27 @@
 using System;
 using System.Windows.Forms;
 using Model.Lib;
+using System.Net.Mail;
 
 namespace RevisedPWApp
 {
     public partial class Login : Form
     {
         private readonly IDisplayProps _props;
-        private string choice;
+        private string choice = "Login";
         private IModelAdapter<UserAccount> userAccount;
+        private IModelAdapter<EmailAccount> emailAcc;
         public int UserAccountId { get; set; }
         public Login()
         {
             InitializeComponent();
         }
 
-        public Login(IDisplayProps props, IModelAdapter<UserAccount> userAdapter) : this()
+        public Login(IDisplayProps props, IModelAdapter<UserAccount> userAdapter, IModelAdapter<EmailAccount> email) : this()
         {
             _props = props;
             userAccount = userAdapter;
+            emailAcc = email;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -38,10 +41,12 @@ namespace RevisedPWApp
                     case "Add":
                         UserAccountId = userAccount.InsertNewRecord(CredentialsInitializer());
                         if (UserAccountId == 0) throw new Exception("Error creating user!");
+                        SaveEmailAccount();
                         break;
                     case "Edit":
                         UserAccountId = userAccount.EditEntry(CredentialsInitializer()).UserId;
                         if (UserAccountId == 0) throw new Exception("Error editing user!");
+                        SaveEmailAccount();
                         break;
                     default:
                         var user = userAccount.GetRecordByCredentials(txtUsername.Text, txtPassword.Text);
@@ -64,6 +69,7 @@ namespace RevisedPWApp
             if (!System.Text.RegularExpressions
                 .Regex.IsMatch(txtPin.Text, "^[0-9]+$"))
                 throw new Exception("Only digits [0 - 9] may be used!");
+            
             var accUser = new UserAccount
             {
                 Username = txtUsername.Text,
@@ -73,6 +79,20 @@ namespace RevisedPWApp
                 Pin = txtPin.Text
             };
             return accUser;
+        }
+
+        private void SaveEmailAccount()
+        {
+            try
+            {
+                MailAddress m = new MailAddress(txtEmail.Text);
+                _props.SetEmailAccount(txtEmail.Text, emailAcc);
+
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid email address entered!", "Invalid Email Address", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Login_Load(object sender, EventArgs e)

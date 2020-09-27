@@ -63,7 +63,7 @@ namespace RevisedPWApp.Models
                 }
                 else
                 {
-                    _pwTracker.Id = _pwTracker.Id == 0 ? AccountUserId : _pwTracker.Id;
+                    _pwTracker.Id = AccountUserId;
                     dataGrid.DataSource = pList ??_pwTracker.GetRecords();
                     FillGrid(dataGrid);
                 }
@@ -220,6 +220,24 @@ namespace RevisedPWApp.Models
                 picture.SizeMode = PictureBoxSizeMode.StretchImage;
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        public void SetEmailAccount(string emailAddress, IModelAdapter<EmailAccount> emailAccount)
+        {
+            var email = emailAccount.GetRecordById(emailAccount.Id);
+            if (email == null)
+            {
+                email = new EmailAccount()
+                {
+                    Email = emailAddress,
+                    UserId = emailAccount.Id
+                };
+                emailAccount.InsertNewRecord(email);
+            }
+            else
+            {
+                emailAccount.EditEntry(email);
+            }   
         }
 
         public string GetPhotoLocationFromFile(IModelAdapter<EmailAccount> emailAccount, int userId)

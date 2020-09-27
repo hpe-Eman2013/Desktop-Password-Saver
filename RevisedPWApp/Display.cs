@@ -37,7 +37,7 @@ namespace RevisedPWApp
             _zipper = zipper;
             _encryptDecrypt = encryption;
             _readerWriter = readerWriter;
-            _loginForm = new Login(_props, userAccount);
+            _loginForm = new Login(_props, userAccount, _email);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

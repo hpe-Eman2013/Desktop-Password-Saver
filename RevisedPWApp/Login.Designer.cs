@@ -43,6 +43,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.lnkCreateUser = new System.Windows.Forms.LinkLabel();
             this.lnkEditUser = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtEmail = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // LoginTitle
@@ -50,7 +52,7 @@
             this.LoginTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LoginTitle.AutoSize = true;
             this.LoginTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginTitle.Location = new System.Drawing.Point(11, 24);
+            this.LoginTitle.Location = new System.Drawing.Point(11, -20);
             this.LoginTitle.Name = "LoginTitle";
             this.LoginTitle.Size = new System.Drawing.Size(86, 20);
             this.LoginTitle.TabIndex = 0;
@@ -61,7 +63,7 @@
             this.lblUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblUsername.AutoSize = true;
             this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(11, 83);
+            this.lblUsername.Location = new System.Drawing.Point(11, 39);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(81, 18);
             this.lblUsername.TabIndex = 1;
@@ -72,7 +74,7 @@
             this.lblPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(11, 147);
+            this.lblPassword.Location = new System.Drawing.Point(11, 75);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(79, 18);
             this.lblPassword.TabIndex = 1;
@@ -83,7 +85,7 @@
             this.lblFirstName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFirstName.Location = new System.Drawing.Point(11, 214);
+            this.lblFirstName.Location = new System.Drawing.Point(11, 120);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(85, 18);
             this.lblFirstName.TabIndex = 1;
@@ -94,7 +96,7 @@
             this.lblLastName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblLastName.AutoSize = true;
             this.lblLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastName.Location = new System.Drawing.Point(11, 278);
+            this.lblLastName.Location = new System.Drawing.Point(11, 161);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(84, 18);
             this.lblLastName.TabIndex = 1;
@@ -105,7 +107,7 @@
             this.lblPin.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPin.AutoSize = true;
             this.lblPin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPin.Location = new System.Drawing.Point(11, 341);
+            this.lblPin.Location = new System.Drawing.Point(11, 208);
             this.lblPin.Name = "lblPin";
             this.lblPin.Size = new System.Drawing.Size(33, 18);
             this.lblPin.TabIndex = 1;
@@ -115,7 +117,7 @@
             // 
             this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsername.Location = new System.Drawing.Point(102, 77);
+            this.txtUsername.Location = new System.Drawing.Point(102, 33);
             this.txtUsername.Multiline = true;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(184, 32);
@@ -125,7 +127,7 @@
             // 
             this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(102, 144);
+            this.txtPassword.Location = new System.Drawing.Point(102, 72);
             this.txtPassword.Multiline = true;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -137,31 +139,31 @@
             // 
             this.txtFirstname.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtFirstname.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFirstname.Location = new System.Drawing.Point(102, 208);
+            this.txtFirstname.Location = new System.Drawing.Point(102, 114);
             this.txtFirstname.Multiline = true;
             this.txtFirstname.Name = "txtFirstname";
             this.txtFirstname.Size = new System.Drawing.Size(184, 32);
-            this.txtFirstname.TabIndex = 3;
+            this.txtFirstname.TabIndex = 2;
             // 
             // txtLastname
             // 
             this.txtLastname.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtLastname.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLastname.Location = new System.Drawing.Point(102, 275);
+            this.txtLastname.Location = new System.Drawing.Point(102, 158);
             this.txtLastname.Multiline = true;
             this.txtLastname.Name = "txtLastname";
             this.txtLastname.Size = new System.Drawing.Size(184, 32);
-            this.txtLastname.TabIndex = 4;
+            this.txtLastname.TabIndex = 3;
             // 
             // txtPin
             // 
             this.txtPin.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtPin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPin.Location = new System.Drawing.Point(102, 335);
+            this.txtPin.Location = new System.Drawing.Point(102, 202);
             this.txtPin.Multiline = true;
             this.txtPin.Name = "txtPin";
             this.txtPin.Size = new System.Drawing.Size(184, 32);
-            this.txtPin.TabIndex = 5;
+            this.txtPin.TabIndex = 4;
             // 
             // btnLogin
             // 
@@ -169,10 +171,10 @@
             this.btnLogin.BackColor = System.Drawing.Color.Green;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLogin.Location = new System.Drawing.Point(102, 380);
+            this.btnLogin.Location = new System.Drawing.Point(102, 298);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(96, 32);
-            this.btnLogin.TabIndex = 2;
+            this.btnLogin.TabIndex = 6;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -184,10 +186,10 @@
             this.btnCancel.BackColor = System.Drawing.Color.Red;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCancel.Location = new System.Drawing.Point(204, 380);
+            this.btnCancel.Location = new System.Drawing.Point(204, 298);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(82, 32);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -197,10 +199,10 @@
             this.lnkCreateUser.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lnkCreateUser.AutoSize = true;
             this.lnkCreateUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkCreateUser.Location = new System.Drawing.Point(89, 435);
+            this.lnkCreateUser.Location = new System.Drawing.Point(89, 353);
             this.lnkCreateUser.Name = "lnkCreateUser";
             this.lnkCreateUser.Size = new System.Drawing.Size(122, 18);
-            this.lnkCreateUser.TabIndex = 6;
+            this.lnkCreateUser.TabIndex = 8;
             this.lnkCreateUser.TabStop = true;
             this.lnkCreateUser.Text = "Create New User";
             this.lnkCreateUser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCreateUser_LinkClicked);
@@ -210,13 +212,33 @@
             this.lnkEditUser.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lnkEditUser.AutoSize = true;
             this.lnkEditUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkEditUser.Location = new System.Drawing.Point(217, 435);
+            this.lnkEditUser.Location = new System.Drawing.Point(217, 353);
             this.lnkEditUser.Name = "lnkEditUser";
             this.lnkEditUser.Size = new System.Drawing.Size(69, 18);
-            this.lnkEditUser.TabIndex = 7;
+            this.lnkEditUser.TabIndex = 9;
             this.lnkEditUser.TabStop = true;
             this.lnkEditUser.Text = "Edit User";
             this.lnkEditUser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkEditUser_LinkClicked);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(11, 253);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 18);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Email:";
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtEmail.Location = new System.Drawing.Point(102, 246);
+            this.txtEmail.Multiline = true;
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(184, 32);
+            this.txtEmail.TabIndex = 5;
             // 
             // Login
             // 
@@ -224,7 +246,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::RevisedPWApp.Properties.Resources.passwordUser;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(312, 462);
+            this.ClientSize = new System.Drawing.Size(312, 375);
+            this.Controls.Add(this.txtEmail);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lnkEditUser);
             this.Controls.Add(this.lnkCreateUser);
             this.Controls.Add(this.btnCancel);
@@ -267,5 +291,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.LinkLabel lnkCreateUser;
         private System.Windows.Forms.LinkLabel lnkEditUser;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtEmail;
     }
 }
