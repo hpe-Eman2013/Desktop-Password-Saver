@@ -333,6 +333,7 @@
             this.txtSearchList.Text = "Search";
             this.txtSearchList.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtSearchList.TextChanged += new System.EventHandler(this.txtSearchList_TextChanged);
+            this.txtSearchList.Enter += new System.EventHandler(this.txtSearchList_Enter);
             // 
             // cboSelectAction
             // 

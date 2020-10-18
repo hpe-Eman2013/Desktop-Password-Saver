@@ -183,5 +183,10 @@ namespace RevisedPWApp
             var filename = _props.GetPhotoLocationFromFile(_email, _props.AccountUserId);
             _props.SetPictureBoxImage(pbAvatar, filename);
         }
+
+        private void txtSearchList_Enter(object sender, EventArgs e)
+        {
+            txtSearchList.Text = string.Empty;
+        }
     }
 }
