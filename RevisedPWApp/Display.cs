@@ -188,5 +188,17 @@ namespace RevisedPWApp
         {
             txtSearchList.Text = string.Empty;
         }
+
+        private void chkCopy_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCopy.Checked)
+            {
+                Clipboard.SetText(txtPassword.Text);
+            }
+            else
+            {
+                Clipboard.Clear();
+            }
+        }
     }
 }

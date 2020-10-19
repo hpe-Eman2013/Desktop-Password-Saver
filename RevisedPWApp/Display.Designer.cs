@@ -64,6 +64,7 @@
             this.btnPushFile = new System.Windows.Forms.Button();
             this.pbAvatar = new System.Windows.Forms.PictureBox();
             this.btnPhoto = new System.Windows.Forms.Button();
+            this.chkCopy = new System.Windows.Forms.CheckBox();
             this.grpPassword.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
@@ -518,6 +519,19 @@
             this.btnPhoto.UseVisualStyleBackColor = false;
             this.btnPhoto.Click += new System.EventHandler(this.btnPhoto_Click);
             // 
+            // chkCopy
+            // 
+            this.chkCopy.AutoSize = true;
+            this.chkCopy.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.chkCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkCopy.Location = new System.Drawing.Point(508, 91);
+            this.chkCopy.Name = "chkCopy";
+            this.chkCopy.Size = new System.Drawing.Size(62, 22);
+            this.chkCopy.TabIndex = 24;
+            this.chkCopy.Text = "Copy";
+            this.chkCopy.UseVisualStyleBackColor = false;
+            this.chkCopy.CheckedChanged += new System.EventHandler(this.chkCopy_CheckedChanged);
+            // 
             // Display
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,6 +539,7 @@
             this.BackgroundImage = global::RevisedPWApp.Properties.Resources.passwordKey;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(873, 520);
+            this.Controls.Add(this.chkCopy);
             this.Controls.Add(this.btnPhoto);
             this.Controls.Add(this.pbAvatar);
             this.Controls.Add(this.btnPushFile);
@@ -609,5 +624,6 @@
         private System.Windows.Forms.Button btnPushFile;
         private System.Windows.Forms.PictureBox pbAvatar;
         private System.Windows.Forms.Button btnPhoto;
+        private System.Windows.Forms.CheckBox chkCopy;
     }
 }
