@@ -39,14 +39,14 @@ namespace RevisedPWApp
                 switch (choice)
                 {
                     case "Add":
+                        SaveEmailAccount();
                         UserAccountId = userAccount.InsertNewRecord(CredentialsInitializer());
                         if (UserAccountId == 0) throw new Exception("Error creating user!");
-                        SaveEmailAccount();
                         break;
                     case "Edit":
+                        SaveEmailAccount();
                         UserAccountId = userAccount.EditEntry(CredentialsInitializer()).UserId;
                         if (UserAccountId == 0) throw new Exception("Error editing user!");
-                        SaveEmailAccount();
                         break;
                     default:
                         var user = userAccount.GetRecordByCredentials(txtUsername.Text, txtPassword.Text);
@@ -58,7 +58,6 @@ namespace RevisedPWApp
             }
             catch (Exception exception)
             {
-                //ClearLogin();
                 MessageBox.Show(exception.Message, @"Invalid Entry Detected", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -89,9 +88,9 @@ namespace RevisedPWApp
                 _props.SetEmailAccount(txtEmail.Text, emailAcc);
 
             }
-            catch (FormatException)
+            catch (Exception)
             {
-                MessageBox.Show("Invalid email address entered!", "Invalid Email Address", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new Exception("Invalid email address entered!");
             }
         }
 
