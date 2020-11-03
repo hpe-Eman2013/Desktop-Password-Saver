@@ -3,9 +3,8 @@ using System.Linq;
 using System.Windows.Forms;
 using RevisedPWApp.Interfaces;
 using Model.Lib;
-using EncryptDecryptPassword;
 using FileZipperAndExtractor;
-using System.Timers;
+using EncryptDecryptPassword;
 
 namespace RevisedPWApp
 {
@@ -200,6 +199,36 @@ namespace RevisedPWApp
             {
                 Clipboard.Clear();
             }
+        }
+
+        private void DateCreated_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDateModified_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDateCreated_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DateModified_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SelectAction_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboSelectAction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

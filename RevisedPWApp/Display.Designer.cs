@@ -77,7 +77,7 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLogin.Location = new System.Drawing.Point(752, 13);
+            this.btnLogin.Location = new System.Drawing.Point(752, 30);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(110, 34);
             this.btnLogin.TabIndex = 0;
@@ -92,7 +92,7 @@
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLogout.Location = new System.Drawing.Point(752, 73);
+            this.btnLogout.Location = new System.Drawing.Point(752, 90);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(110, 34);
             this.btnLogout.TabIndex = 21;
@@ -106,7 +106,7 @@
             this.btnClear.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(752, 138);
+            this.btnClear.Location = new System.Drawing.Point(752, 155);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(110, 34);
             this.btnClear.TabIndex = 20;
@@ -121,7 +121,7 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnExit.Location = new System.Drawing.Point(752, 203);
+            this.btnExit.Location = new System.Drawing.Point(752, 220);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(110, 34);
             this.btnExit.TabIndex = 22;
@@ -135,7 +135,7 @@
             this.lblName.AutoSize = true;
             this.lblName.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(18, 11);
+            this.lblName.Location = new System.Drawing.Point(12, 30);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(52, 18);
             this.lblName.TabIndex = 1;
@@ -147,7 +147,7 @@
             this.AppPath.AutoSize = true;
             this.AppPath.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.AppPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AppPath.Location = new System.Drawing.Point(18, 129);
+            this.AppPath.Location = new System.Drawing.Point(12, 162);
             this.AppPath.Name = "AppPath";
             this.AppPath.Size = new System.Drawing.Size(117, 18);
             this.AppPath.TabIndex = 1;
@@ -159,7 +159,7 @@
             this.Username.AutoSize = true;
             this.Username.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Username.Location = new System.Drawing.Point(18, 49);
+            this.Username.Location = new System.Drawing.Point(12, 82);
             this.Username.Name = "Username";
             this.Username.Size = new System.Drawing.Size(81, 18);
             this.Username.TabIndex = 1;
@@ -171,7 +171,7 @@
             this.Password.AutoSize = true;
             this.Password.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Password.Location = new System.Drawing.Point(18, 89);
+            this.Password.Location = new System.Drawing.Point(12, 122);
             this.Password.Name = "Password";
             this.Password.Size = new System.Drawing.Size(79, 18);
             this.Password.TabIndex = 1;
@@ -183,11 +183,12 @@
             this.DateCreated.AutoSize = true;
             this.DateCreated.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DateCreated.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DateCreated.Location = new System.Drawing.Point(18, 248);
+            this.DateCreated.Location = new System.Drawing.Point(12, 331);
             this.DateCreated.Name = "DateCreated";
             this.DateCreated.Size = new System.Drawing.Size(99, 18);
             this.DateCreated.TabIndex = 1;
             this.DateCreated.Text = "Date Created:";
+            this.DateCreated.Click += new System.EventHandler(this.DateCreated_Click);
             // 
             // SelectAction
             // 
@@ -195,11 +196,12 @@
             this.SelectAction.AutoSize = true;
             this.SelectAction.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.SelectAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectAction.Location = new System.Drawing.Point(17, 327);
+            this.SelectAction.Location = new System.Drawing.Point(12, 410);
             this.SelectAction.Name = "SelectAction";
             this.SelectAction.Size = new System.Drawing.Size(98, 18);
             this.SelectAction.TabIndex = 1;
             this.SelectAction.Text = "Select Action:";
+            this.SelectAction.Click += new System.EventHandler(this.SelectAction_Click);
             // 
             // Description
             // 
@@ -207,7 +209,7 @@
             this.Description.AutoSize = true;
             this.Description.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Description.Location = new System.Drawing.Point(18, 167);
+            this.Description.Location = new System.Drawing.Point(12, 215);
             this.Description.Name = "Description";
             this.Description.Size = new System.Drawing.Size(87, 18);
             this.Description.TabIndex = 1;
@@ -219,7 +221,7 @@
             this.SpecialNotes.AutoSize = true;
             this.SpecialNotes.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.SpecialNotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SpecialNotes.Location = new System.Drawing.Point(18, 208);
+            this.SpecialNotes.Location = new System.Drawing.Point(12, 272);
             this.SpecialNotes.Name = "SpecialNotes";
             this.SpecialNotes.Size = new System.Drawing.Size(104, 18);
             this.SpecialNotes.TabIndex = 1;
@@ -231,28 +233,29 @@
             this.DateModified.AutoSize = true;
             this.DateModified.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DateModified.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DateModified.Location = new System.Drawing.Point(18, 288);
+            this.DateModified.Location = new System.Drawing.Point(12, 371);
             this.DateModified.Name = "DateModified";
             this.DateModified.Size = new System.Drawing.Size(103, 18);
             this.DateModified.TabIndex = 1;
             this.DateModified.Text = "Date Modified:";
+            this.DateModified.Click += new System.EventHandler(this.DateModified_Click);
             // 
             // txtName
             // 
             this.txtName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(141, 11);
+            this.txtName.Location = new System.Drawing.Point(141, 29);
             this.txtName.Multiline = true;
             this.txtName.Name = "txtName";
             this.txtName.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtName.Size = new System.Drawing.Size(213, 32);
+            this.txtName.Size = new System.Drawing.Size(213, 44);
             this.txtName.TabIndex = 1;
             // 
             // txtUsername
             // 
             this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsername.Location = new System.Drawing.Point(141, 50);
+            this.txtUsername.Location = new System.Drawing.Point(141, 83);
             this.txtUsername.Multiline = true;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(213, 32);
@@ -262,7 +265,7 @@
             // 
             this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(141, 89);
+            this.txtPassword.Location = new System.Drawing.Point(141, 122);
             this.txtPassword.Multiline = true;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -273,60 +276,62 @@
             // 
             this.txtDateCreated.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDateCreated.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDateCreated.Location = new System.Drawing.Point(141, 248);
+            this.txtDateCreated.Location = new System.Drawing.Point(141, 331);
             this.txtDateCreated.Multiline = true;
             this.txtDateCreated.Name = "txtDateCreated";
             this.txtDateCreated.Size = new System.Drawing.Size(213, 32);
             this.txtDateCreated.TabIndex = 8;
+            this.txtDateCreated.TextChanged += new System.EventHandler(this.txtDateCreated_TextChanged);
             // 
             // txtAppPath
             // 
             this.txtAppPath.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtAppPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAppPath.Location = new System.Drawing.Point(141, 129);
+            this.txtAppPath.Location = new System.Drawing.Point(141, 162);
             this.txtAppPath.Multiline = true;
             this.txtAppPath.Name = "txtAppPath";
             this.txtAppPath.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtAppPath.Size = new System.Drawing.Size(213, 32);
+            this.txtAppPath.Size = new System.Drawing.Size(213, 43);
             this.txtAppPath.TabIndex = 5;
             // 
             // txtDesc
             // 
             this.txtDesc.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDesc.Location = new System.Drawing.Point(141, 167);
+            this.txtDesc.Location = new System.Drawing.Point(141, 215);
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDesc.Size = new System.Drawing.Size(213, 32);
+            this.txtDesc.Size = new System.Drawing.Size(213, 52);
             this.txtDesc.TabIndex = 6;
             // 
             // txtSpecialNotes
             // 
             this.txtSpecialNotes.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtSpecialNotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSpecialNotes.Location = new System.Drawing.Point(141, 209);
+            this.txtSpecialNotes.Location = new System.Drawing.Point(141, 273);
             this.txtSpecialNotes.Multiline = true;
             this.txtSpecialNotes.Name = "txtSpecialNotes";
             this.txtSpecialNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtSpecialNotes.Size = new System.Drawing.Size(213, 32);
+            this.txtSpecialNotes.Size = new System.Drawing.Size(213, 48);
             this.txtSpecialNotes.TabIndex = 7;
             // 
             // txtDateModified
             // 
             this.txtDateModified.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDateModified.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDateModified.Location = new System.Drawing.Point(140, 288);
+            this.txtDateModified.Location = new System.Drawing.Point(140, 371);
             this.txtDateModified.Multiline = true;
             this.txtDateModified.Name = "txtDateModified";
             this.txtDateModified.Size = new System.Drawing.Size(213, 32);
             this.txtDateModified.TabIndex = 9;
+            this.txtDateModified.TextChanged += new System.EventHandler(this.txtDateModified_TextChanged);
             // 
             // txtSearchList
             // 
             this.txtSearchList.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtSearchList.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchList.Location = new System.Drawing.Point(428, 313);
+            this.txtSearchList.Location = new System.Drawing.Point(428, 346);
             this.txtSearchList.Multiline = true;
             this.txtSearchList.Name = "txtSearchList";
             this.txtSearchList.Size = new System.Drawing.Size(86, 31);
@@ -345,10 +350,11 @@
             "Add New",
             "Edit Items",
             "Delete Items"});
-            this.cboSelectAction.Location = new System.Drawing.Point(140, 328);
+            this.cboSelectAction.Location = new System.Drawing.Point(140, 411);
             this.cboSelectAction.Name = "cboSelectAction";
             this.cboSelectAction.Size = new System.Drawing.Size(212, 26);
             this.cboSelectAction.TabIndex = 10;
+            this.cboSelectAction.SelectedIndexChanged += new System.EventHandler(this.cboSelectAction_SelectedIndexChanged);
             this.cboSelectAction.SelectionChangeCommitted += new System.EventHandler(this.cboSelectAction_SelectionChangeCommitted);
             // 
             // grpPassword
@@ -359,7 +365,7 @@
             this.grpPassword.Controls.Add(this.gpTen);
             this.grpPassword.Controls.Add(this.gpEight);
             this.grpPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPassword.Location = new System.Drawing.Point(360, 13);
+            this.grpPassword.Location = new System.Drawing.Point(360, 24);
             this.grpPassword.Name = "grpPassword";
             this.grpPassword.Size = new System.Drawing.Size(210, 72);
             this.grpPassword.TabIndex = 4;
@@ -411,7 +417,7 @@
             this.chkUnmask.AutoSize = true;
             this.chkUnmask.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.chkUnmask.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUnmask.Location = new System.Drawing.Point(360, 91);
+            this.chkUnmask.Location = new System.Drawing.Point(360, 122);
             this.chkUnmask.Name = "chkUnmask";
             this.chkUnmask.Size = new System.Drawing.Size(83, 22);
             this.chkUnmask.TabIndex = 17;
@@ -425,7 +431,7 @@
             this.dv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dv.Location = new System.Drawing.Point(428, 362);
+            this.dv.Location = new System.Drawing.Point(428, 395);
             this.dv.Name = "dv";
             this.dv.Size = new System.Drawing.Size(434, 147);
             this.dv.TabIndex = 19;
@@ -437,7 +443,7 @@
             this.lblRetrieveFile.AutoSize = true;
             this.lblRetrieveFile.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblRetrieveFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRetrieveFile.Location = new System.Drawing.Point(18, 362);
+            this.lblRetrieveFile.Location = new System.Drawing.Point(12, 446);
             this.lblRetrieveFile.Name = "lblRetrieveFile";
             this.lblRetrieveFile.Size = new System.Drawing.Size(106, 18);
             this.lblRetrieveFile.TabIndex = 1;
@@ -449,7 +455,7 @@
             this.lblPushFile.AutoSize = true;
             this.lblPushFile.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblPushFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPushFile.Location = new System.Drawing.Point(18, 434);
+            this.lblPushFile.Location = new System.Drawing.Point(12, 488);
             this.lblPushFile.Name = "lblPushFile";
             this.lblPushFile.Size = new System.Drawing.Size(127, 18);
             this.lblPushFile.TabIndex = 1;
@@ -460,7 +466,7 @@
             this.txtPushFile.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtPushFile.BackColor = System.Drawing.SystemColors.ControlDark;
             this.txtPushFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPushFile.Location = new System.Drawing.Point(140, 456);
+            this.txtPushFile.Location = new System.Drawing.Point(140, 489);
             this.txtPushFile.Multiline = true;
             this.txtPushFile.Name = "txtPushFile";
             this.txtPushFile.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -474,9 +480,9 @@
             this.btnGetFile.BackgroundImage = global::RevisedPWApp.Properties.Resources.downloadFile;
             this.btnGetFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnGetFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGetFile.Location = new System.Drawing.Point(140, 378);
+            this.btnGetFile.Location = new System.Drawing.Point(140, 445);
             this.btnGetFile.Name = "btnGetFile";
-            this.btnGetFile.Size = new System.Drawing.Size(53, 53);
+            this.btnGetFile.Size = new System.Drawing.Size(90, 35);
             this.btnGetFile.TabIndex = 12;
             this.btnGetFile.UseVisualStyleBackColor = true;
             this.btnGetFile.Click += new System.EventHandler(this.btnGetFile_Click);
@@ -487,7 +493,7 @@
             this.btnPushFile.BackgroundImage = global::RevisedPWApp.Properties.Resources.uploadFile;
             this.btnPushFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnPushFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPushFile.Location = new System.Drawing.Point(359, 456);
+            this.btnPushFile.Location = new System.Drawing.Point(359, 489);
             this.btnPushFile.Name = "btnPushFile";
             this.btnPushFile.Size = new System.Drawing.Size(53, 53);
             this.btnPushFile.TabIndex = 16;
@@ -500,7 +506,7 @@
             this.pbAvatar.BackgroundImage = global::RevisedPWApp.Properties.Resources.avatar;
             this.pbAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pbAvatar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbAvatar.Location = new System.Drawing.Point(576, 13);
+            this.pbAvatar.Location = new System.Drawing.Point(576, 30);
             this.pbAvatar.Name = "pbAvatar";
             this.pbAvatar.Size = new System.Drawing.Size(170, 174);
             this.pbAvatar.TabIndex = 23;
@@ -511,7 +517,7 @@
             this.btnPhoto.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnPhoto.BackColor = System.Drawing.Color.PeachPuff;
             this.btnPhoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPhoto.Location = new System.Drawing.Point(576, 193);
+            this.btnPhoto.Location = new System.Drawing.Point(576, 210);
             this.btnPhoto.Name = "btnPhoto";
             this.btnPhoto.Size = new System.Drawing.Size(170, 44);
             this.btnPhoto.TabIndex = 23;
@@ -524,7 +530,7 @@
             this.chkCopy.AutoSize = true;
             this.chkCopy.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.chkCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkCopy.Location = new System.Drawing.Point(508, 91);
+            this.chkCopy.Location = new System.Drawing.Point(508, 122);
             this.chkCopy.Name = "chkCopy";
             this.chkCopy.Size = new System.Drawing.Size(62, 22);
             this.chkCopy.TabIndex = 24;
@@ -538,7 +544,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::RevisedPWApp.Properties.Resources.passwordKey;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(873, 520);
+            this.ClientSize = new System.Drawing.Size(873, 587);
             this.Controls.Add(this.chkCopy);
             this.Controls.Add(this.btnPhoto);
             this.Controls.Add(this.pbAvatar);
@@ -573,7 +579,6 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnLogin);
-            this.MaximumSize = new System.Drawing.Size(883, 550);
             this.Name = "Display";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Display Passwords";

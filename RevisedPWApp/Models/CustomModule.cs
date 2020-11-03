@@ -1,8 +1,8 @@
 ﻿using Ninject.Modules;
 using RevisedPWApp.Interfaces;
-using EncryptDecryptPassword;
-using FileZipperAndExtractor;
 using Model.Lib;
+using FileZipperAndExtractor;
+using EncryptDecryptPassword;
 
 namespace RevisedPWApp.Models
 {
