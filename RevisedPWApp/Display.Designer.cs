@@ -65,6 +65,7 @@
             this.pbAvatar = new System.Windows.Forms.PictureBox();
             this.btnPhoto = new System.Windows.Forms.Button();
             this.chkCopy = new System.Windows.Forms.CheckBox();
+            this.lblUserId = new System.Windows.Forms.Label();
             this.grpPassword.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
@@ -538,6 +539,18 @@
             this.chkCopy.UseVisualStyleBackColor = false;
             this.chkCopy.CheckedChanged += new System.EventHandler(this.chkCopy_CheckedChanged);
             // 
+            // lblUserId
+            // 
+            this.lblUserId.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblUserId.AutoSize = true;
+            this.lblUserId.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblUserId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserId.Location = new System.Drawing.Point(581, 271);
+            this.lblUserId.Name = "lblUserId";
+            this.lblUserId.Size = new System.Drawing.Size(209, 20);
+            this.lblUserId.TabIndex = 25;
+            this.lblUserId.Text = "Your User ID Number is: ";
+            // 
             // Display
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -545,6 +558,7 @@
             this.BackgroundImage = global::RevisedPWApp.Properties.Resources.passwordKey;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(873, 587);
+            this.Controls.Add(this.lblUserId);
             this.Controls.Add(this.chkCopy);
             this.Controls.Add(this.btnPhoto);
             this.Controls.Add(this.pbAvatar);
@@ -630,5 +644,6 @@
         private System.Windows.Forms.PictureBox pbAvatar;
         private System.Windows.Forms.Button btnPhoto;
         private System.Windows.Forms.CheckBox chkCopy;
+        private System.Windows.Forms.Label lblUserId;
     }
 }

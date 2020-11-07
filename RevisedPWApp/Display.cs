@@ -45,6 +45,7 @@ namespace RevisedPWApp
             _loginForm.ShowDialog();
             if (_loginForm.UserAccountId == 0) return;//user is not present
             _props.AccountUserId = _loginForm.UserAccountId;
+            lblUserId.Text += _loginForm.UserAccountId;
             _pwTracker.Id = _loginForm.UserAccountId;
             _props.LoadDataGrid(dv, false);
             var imageLocation = _email.GetRecordById(_loginForm.UserAccountId);
